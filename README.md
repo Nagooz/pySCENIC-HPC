@@ -1,7 +1,7 @@
 # pySCENIC-HPC: Adaptation de PySCENIC pour HPC avec Nextflow
 
 ## Description
-Ce dépôt contient une adaptation du code `pySCENIC` pour l'exécution sur un cluster HPC sans utiliser Docker ou Singularity. Le projet est configuré pour être exécuté via Nextflow pour gérer l'exécution des différentes étapes de l'analyse. L'objectif est de permettre l'exécution de pySCENIC sur des ressources de calcul à grande échelle, tout en restant compatible avec des systèmes sans conteneurs.
+Ce dépôt contient une adaptation du code `pySCENIC` pour l'exécution **sur un cluster HPC sans utiliser Docker ou Singularity**. Le projet est configuré pour être exécuté via Nextflow pour gérer l'exécution des différentes étapes de l'analyse. L'objectif est de permettre l'exécution de pySCENIC sur des ressources de calcul à grande échelle, tout en restant compatible avec des systèmes sans conteneurs.
 
 ## Prérequis
 + Nextflow installé sur votre machine ou sur le système HPC
