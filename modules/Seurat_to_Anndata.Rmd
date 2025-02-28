@@ -1,0 +1,73 @@
+---
+title: "250121_Seurat to Anndata"
+author: "Margaux Labrosse"
+date: "2025-01-21"
+output: html_document
+---
+
+# *From Seurat object to Anndata*
+
+## Library
+
+```{r}
+library(Matrix)
+library(dplyr)
+library(Seurat)
+```
+
+```{r}
+name <- "ASC_processed"
+```
+
+```{r}
+out_data_dir <- "Q:/Margaux_Labrosse/THESE/240524_scRNA_TAsc_MU_FSC/scAT-Fasc-Musc/02 - rds_reseq/Anndata/"
+```
+
+## Load dataset
+
+```{r}
+seurat_obj <- readRDS("Q:/Margaux_Labrosse/THESE/240524_scRNA_TAsc_MU_FSC/scAT-Fasc-Musc/02 - rds_reseq/scAT/241210_TAsc_ASC_QC_mR0.07_nF1000_labeled.rds")
+```
+
+```{r}
+seurat_obj <- subset(seurat_obj , condition == "NI")
+```
+
+## Data processing
+
+-   Metadata and UMAP
+
+```{r}
+seurat_obj$barcode <- colnames(seurat_obj)
+seurat_obj$UMAP_1 <- seurat_obj@reductions$umap@cell.embeddings[, 1]
+seurat_obj$UMAP_2 <- seurat_obj@reductions$umap@cell.embeddings[, 2]
+write.csv(seurat_obj@meta.data, file =  paste0(out_data_dir, name ,"_metadata.csv"),
+    quote = FALSE, row.names = FALSE)
+```
+
+-   Counts matrix
+
+```{r}
+counts_matrix <- GetAssayData(seurat_obj, assay = "SCT", slot = "data")
+writeMM(counts_matrix, file = paste0(out_data_dir, name , "_counts.mtx"))
+```
+
+```{r}
+write.table(counts_matrix, file =paste0(out_data_dir, name ,"_counts.txt"), sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
+```
+
+-   Dimensionality reduction matrix
+
+```{r}
+write.csv(seurat_obj@reductions$pca@cell.embeddings, file = paste0(out_data_dir, name , "_pca.csv"),
+    quote = FALSE, row.names = FALSE)
+```
+
+-   write gene names
+
+```{r}
+write.table(
+  data.frame("gene" = rownames(counts_matrix)), file = paste0(out_data_dir, name , "_gene_names.csv"),
+  quote = FALSE, row.names = FALSE, col.names = FALSE
+)
+```
