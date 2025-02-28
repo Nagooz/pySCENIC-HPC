@@ -28,6 +28,7 @@ Ce répertoire contient les fichiers nécessaires pour configurer l'environnemen
 ### `modules/`
 Les modules contiennent des scripts et des notebooks pour exécuter différentes parties du pipeline pySCENIC :
 
++ `download_aux_datasets.sh` : Script pour télécharger les datasets auxiliaires pour l'analyse (`allTFs_mm.txt`, `motifs-v9-nr.mgi-m0.001-o0.0.tbl`, `*.feather`)
 + `Seurat_to_Anndata.Rmd` , `Anndata_loom_file.ipynb` : Notebooks pour convertir des objets Seurat en objets Anndata et en format loom
 + `install_miniconda.sh` , `install_python.sh` : Script pour installer python v3.10 et miniconda
 + `environment_setup.sh` : Script pour configurer l'environnement de travail
